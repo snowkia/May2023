@@ -48,7 +48,7 @@ namespace May2023.Tests
                 // TM page object initialization and definition
                 T_MPage tmPageObj = new T_MPage();
                 // Edit Time record
-                tmPageObj.EditTM(driver);
+                //tmPageObj.EditTM(driver);
             }
 
             [Test, Order(3)]

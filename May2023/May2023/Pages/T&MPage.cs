@@ -49,27 +49,31 @@ namespace May2023.Pages
             //navigate to last page 
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 10);
             IWebElement gotolastpagebutton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            Thread.Sleep(3000);
             gotolastpagebutton.Click();
+            Thread.Sleep(3000);
 
 
 
-
-            //find the last record on list page 
+        }
+        public string GetCode(IWebDriver driver)
+        {
             IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            IWebElement newTypeCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[2]"));
+            return newCode.Text;
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
             IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
             IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
 
-            Assert.That(newCode.Text == "May2023", "Actual Code and expected code do not match.");
-            Assert.That(newTypeCode.Text == "T", "Actual TypeCode and expected typecode do not match.");
-            Assert.That(newDescription.Text == "May2023", "Actual Description and expected description do not match.");
-            Assert.That(newPrice.Text == "$12.00", "Actual Price and expected price do not match.");
-
-        
-
-    }
-        public void EditTM(IWebDriver driver)
+        public void EditTM(IWebDriver driver, string description)
         {
             Thread.Sleep(3000);
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
@@ -98,13 +102,39 @@ namespace May2023.Pages
             descriptionTextbox.Clear();
             descriptionTextbox.SendKeys("June2023");
 
-            IWebElement priceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            priceTextbox.SendKeys("30");
-            Thread.Sleep(2000);
+            //edit description into description box
+            IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
+            descriptionTextbox.Clear();
+            descriptionTextbox.SendKeys(description);
 
+            //edit price into price per unit textbox
+            IWebElement editpriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            IWebElement editpriceTextbox = driver.FindElement(By.Id("Price"));
+
+            editpriceOverlap.Click();
+            editpriceTextbox.Clear();
+            editpriceOverlap.Click();
+            editpriceTextbox.SendKeys("30");
+
+            //click on save button
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
             Thread.Sleep(1000);
+
+            //check if Time record has been edited
+            IWebElement goToEditLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            goToEditLastPageButton.Click();
+            Thread.Sleep(1500);
+
+            ////find the last record on list page 
+            //IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            //Assert.That(editedCode.Text == "June2023", "Actual Code and expected code do not match.");
+        }
+
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement createdDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return createdDescription.Text;
         }
 
         public void DeleteTM(IWebDriver driver)

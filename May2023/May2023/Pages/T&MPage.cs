@@ -103,7 +103,7 @@ namespace May2023.Pages
             descriptionTextbox.SendKeys("June2023");
 
             //edit description into description box
-            IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
+            //IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
             descriptionTextbox.Clear();
             descriptionTextbox.SendKeys(description);
 

@@ -40,32 +40,30 @@ namespace May2023.StepDefinitions
         {
             T_MPage tmPageObj = new T_MPage();
 
-            string newCode = tmPageObj.GetCode(driver);
             string newDescription = tmPageObj.GetDescription(driver);
+            string newCode = tmPageObj.GetCode(driver);
             string newPrice = tmPageObj.GetPrice(driver);
 
-            Assert.AreEqual("May2023", newCode, "Actual Code and expected code do not match.");
             Assert.AreEqual("May2023", newDescription, "Actual Description and expected description do not match.");
+            Assert.AreEqual("May2023", newCode, "Actual Code and expected code do not match.");
             Assert.AreEqual("$12.00", newPrice, "Actual Price and expected price do not match.");
         }
 
-        [When(@"I update '([^']*)','([^']*)' and '([^']*)' on an existing time and material record")]
+        [When(@"I update '([^']*)', '([^']*)' and '([^']*)' on an existing time and material record")]
         public void WhenIUpdateAndOnAnExistingTimeAndMaterialRecord(string description, string code, string price)
+
         {
             T_MPage tmPageObj = new T_MPage();
             tmPageObj.EditTM(driver, description, code, price);
         }
 
         [Then(@"The record should been updated '([^']*)', '([^']*)' and '([^']*)'")]
-
-
-
         public void ThenTheRecordShouldBeenUpdatedAnd(string description, string code, string price)
         {
             T_MPage tmPageObj = new T_MPage();
 
-            string editedCode = tmPageObj.GetEditedCode(driver);
             string editedDescription = tmPageObj.GetEditedDescription(driver);
+            string editedCode = tmPageObj.GetEditedCode(driver);
             string editedPrice = tmPageObj.GetEditedPrice(driver);
 
             Assert.AreEqual(code, editedCode, "Actual edited description and expected edited description do not match.");

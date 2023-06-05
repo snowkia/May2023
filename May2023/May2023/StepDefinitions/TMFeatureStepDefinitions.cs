@@ -14,7 +14,6 @@ namespace May2023.StepDefinitions
         [Given(@"I logged into turnup up portal successfully")]
         public void GivenILoggedIntoTurnupUpPortalSuccessfully()
         {
-            // open chrome browser
             driver = new ChromeDriver();
 
             // Login page object initialization and definition
@@ -25,7 +24,6 @@ namespace May2023.StepDefinitions
         [When(@"I navigate to Time and Material page")]
         public void WhenINavigateToTimeAndMaterialPage()
         {
-            // Home page object initialization and definition
             HomePage homePageObj = new HomePage();
             homePageObj.GoToTMPage(driver);
         }
@@ -33,7 +31,6 @@ namespace May2023.StepDefinitions
         [When(@"I create a new time and material record")]
         public void WhenICreateANewTimeAndMaterialRecord()
         {
-            // TM page object initialization and definition
             T_MPage tmPageObj = new T_MPage();
             tmPageObj.CreateTM(driver);
         }
@@ -51,21 +48,29 @@ namespace May2023.StepDefinitions
             Assert.AreEqual("May2023", newDescription, "Actual Description and expected description do not match.");
             Assert.AreEqual("$12.00", newPrice, "Actual Price and expected price do not match.");
         }
-        [When(@"I update '([^']*)' on an existing time and material record")]
-        public void WhenIUpdateOnAnExistingTimeAndMaterialRecord(string description)
+
+        [When(@"I update '([^']*)','([^']*)' and '([^']*)' on an existing time and material record")]
+        public void WhenIUpdateAndOnAnExistingTimeAndMaterialRecord(string description, string code, string price)
         {
             T_MPage tmPageObj = new T_MPage();
-            tmPageObj.EditTM(driver, description);
+            tmPageObj.EditTM(driver, description, code, price);
         }
 
-        [Then(@"The record should been updated '([^']*)'")]
-        public void ThenTheRecordShouldBeenUpdated(string description)
+        [Then(@"The record should been updated '([^']*)', '([^']*)' and '([^']*)'")]
+
+
+
+        public void ThenTheRecordShouldBeenUpdatedAnd(string description, string code, string price)
         {
             T_MPage tmPageObj = new T_MPage();
 
-            string editedDesription = tmPageObj.GetEditedDescription(driver);
+            string editedCode = tmPageObj.GetEditedCode(driver);
+            string editedDescription = tmPageObj.GetEditedDescription(driver);
+            string editedPrice = tmPageObj.GetEditedPrice(driver);
 
-            Assert.AreEqual(description, editedDesription, "Actual edtied description and expected edited description do not match.");
+            Assert.AreEqual(code, editedCode, "Actual edited description and expected edited description do not match.");
+            Assert.AreEqual(description, editedDescription, "Actual edited description and expected edited description do not match.");
+            Assert.AreEqual(price, editedPrice, "Actual Price and expected price do not match.");
         }
     }
 }

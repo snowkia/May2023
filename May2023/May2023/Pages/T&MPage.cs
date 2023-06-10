@@ -105,8 +105,6 @@ namespace May2023.Pages
 
             //edit description into description box
             //IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
-            descriptionTextbox.Clear();
-            descriptionTextbox.SendKeys(description);
 
             //edit price into price per unit textbox
             IWebElement editpriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
@@ -115,7 +113,9 @@ namespace May2023.Pages
             editpriceOverlap.Click();
             editpriceTextbox.Clear();
             editpriceOverlap.Click();
+            Thread.Sleep(3000);
             editpriceTextbox.SendKeys(price);
+            Thread.Sleep(3000);
 
             //click on save button
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));

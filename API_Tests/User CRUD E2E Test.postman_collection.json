@@ -21,7 +21,7 @@
 							"// Assertion 2 - Response value check\r",
 							"pm.test(\"Key value pair check\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.name).to.eql(\"galen\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"snowkia\");\r",
 							"    pm.expect(jsonData.job).to.eql(\"manual tester\");\r",
 							"\r",
 							"    pm.environment.set(\"userID\", jsonData.id);\r",
@@ -37,7 +37,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"galen\",\r\n    \"job\": \"manual tester\"\r\n}",
+					"raw": "{\r\n    \"name\": \"snowkia\",\r\n    \"job\": \"manual tester\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,7 +72,7 @@
 							"// Assertion 2 - Response value check\r",
 							"pm.test(\"Key value pair check\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.name).to.eql(\"galen\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"snowkia\");\r",
 							"    pm.expect(jsonData.job).to.eql(\"automation tester\");\r",
 							"});\r",
 							""
@@ -86,7 +86,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"galen\",\r\n    \"job\": \"automation tester\"\r\n}",
+					"raw": "{\r\n    \"name\": \"snowkia\",\r\n    \"job\": \"automation tester\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
